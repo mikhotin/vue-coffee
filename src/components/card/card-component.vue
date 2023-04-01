@@ -19,7 +19,7 @@ const notes = props.item.notes.split(',');
 <template>
   <article class="card">
     <Loader v-if="isLoading" />
-    <img v-if="data" class="card__image" :src="data.url" alt="Изображениие" />
+    <img v-if="data" class="card__image" :src="data.url" alt="Изображение" />
     <div class="card__container">
       <span class="card__country">{{ item.origin }}</span>
       <h2 class="card__title">{{ item.blend_name }}</h2>
@@ -50,6 +50,7 @@ const notes = props.item.notes.split(',');
   height: 100%;
   font-family: 'Fira Sans';
   font-style: normal;
+  text-align: left;
 }
 
 .card__container {

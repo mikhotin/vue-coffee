@@ -2,6 +2,5 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "tabWidth": 2,
-  "semi": true,
-  "maxLineLength": 200
+  "semi": true
 }

@@ -2,22 +2,13 @@
 import { ref } from 'vue';
 import { useQueryClient, useQuery } from '@tanstack/vue-query';
 import { getCoffee } from './api';
-// import Button from './components/button/index.vue';
+import Button from './components/button/load-button.vue';
 import Card from './components/card/card-component.vue';
-
-// type Coffee = {
-//   id: number;
-//   blend_name: string;
-//   intensifier: string;
-//   notes: string;
-//   origin: string;
-//   variety: number;
-//   uid: string;
-// };
+import type { Coffee } from './types';
 
 const queryClient = useQueryClient();
 
-const coffeeList = ref<Array<any>>([]);
+const coffeeList = ref<Array<Coffee>>([]);
 const refetchInterval = ref(30000);
 
 const { isLoading, isFetching } = useQuery({
@@ -38,27 +29,38 @@ const loadCoffee = () => {
 
 <template>
   <section class="coffee-shop">
+    <h1 class="visually-hidden">Coffee shop</h1>
     <ul class="coffee-list">
       <li v-for="item in coffeeList" :key="item.id" class="coffee-list__item">
-        <Card :item="item" />
+        <Card :item="item" :is-loading="isFetching" />
       </li>
     </ul>
+    <Button :is-loading="isLoading || isFetching" @click="loadCoffee" />
   </section>
-  <button :disabled="isLoading || isFetching" @click="loadCoffee">
-    Click me
-  </button>
 </template>
 
 <style scoped lang="scss">
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
 .coffee-shop {
   padding: 10px;
+  text-align: center;
 }
 .coffee-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  min-height: 274px;
 }
 
 .coffee-list__item {

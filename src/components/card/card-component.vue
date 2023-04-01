@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { PropType } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { getImage } from '../../api';
 import Loader from '../loader/loader-component.vue';
+import type { Coffee } from '../../types';
 
 const props = defineProps({
   item: {
-    type: Object,
+    type: Object as PropType<Coffee>,
     required: true,
   },
 });
@@ -24,13 +26,11 @@ const notes = props.item.notes.split(',');
       <span class="card__country">{{ item.origin }}</span>
       <h2 class="card__title">{{ item.blend_name }}</h2>
       <span class="card__kind">{{ item.variety }}</span>
-      <div class="card__wrapper">
-        <ul class="card__notes">
-          <li v-for="note in notes" :key="note" class="card__note">
-            {{ note }}
-          </li>
-        </ul>
-      </div>
+      <ul class="card__notes">
+        <li v-for="note in notes" :key="note" class="card__note">
+          {{ note }}
+        </li>
+      </ul>
     </div>
     <span class="card__intensifier">{{ item.intensifier }}</span>
   </article>
@@ -46,7 +46,6 @@ const notes = props.item.notes.split(',');
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   width: 200px;
-  /* min-height: 270px; */
   height: 100%;
   font-family: 'Fira Sans';
   font-style: normal;
@@ -94,11 +93,8 @@ const notes = props.item.notes.split(',');
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card__wrapper {
-  margin-top: 10px;
-}
-
 .card__notes {
+  margin-top: 10px;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -106,10 +102,29 @@ const notes = props.item.notes.split(',');
   margin: 0;
   padding: 0;
   cursor: pointer;
-}
+  height: 26px;
 
-.card__notes::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+    position: relative;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 0.5px solid black;
+    border-radius: 2px;
+    background: grey;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      display: block;
+    }
+  }
 }
 
 .card__note {

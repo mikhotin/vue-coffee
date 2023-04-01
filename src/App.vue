@@ -4,12 +4,13 @@ import { useQueryClient, useQuery } from '@tanstack/vue-query';
 import { getCoffee } from './api';
 import Button from './components/button/load-button.vue';
 import Card from './components/card/card-component.vue';
+
 import type { Coffee } from './types';
+import { REFETCH_INTERVAL } from './constants';
 
 const queryClient = useQueryClient();
-
 const coffeeList = ref<Array<Coffee>>([]);
-const refetchInterval = ref(30000);
+const refetchInterval = ref(REFETCH_INTERVAL);
 
 const { isLoading, isFetching } = useQuery({
   queryKey: ['coffee'],
@@ -18,7 +19,7 @@ const { isLoading, isFetching } = useQuery({
   refetchOnWindowFocus: false,
   onSuccess: (data) => {
     coffeeList.value.push(data);
-    refetchInterval.value = 30000;
+    refetchInterval.value = REFETCH_INTERVAL;
   },
 });
 

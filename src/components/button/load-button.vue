@@ -20,7 +20,7 @@ defineProps({ isLoading: { type: Boolean, required: true } });
   background: #009579;
   border: none;
   outline: none;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
 
   &:active {

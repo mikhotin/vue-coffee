@@ -74,6 +74,7 @@ const notes = props.item.notes.split(',');
 }
 
 .card__kind {
+  margin-bottom: 8px;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;

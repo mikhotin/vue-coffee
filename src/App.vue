@@ -4,7 +4,6 @@ import { useQueryClient, useQuery } from '@tanstack/vue-query';
 import { getCoffee } from './api';
 import Button from './components/button/load-button.vue';
 import Card from './components/card/card-component.vue';
-
 import type { Coffee } from './types';
 import { REFETCH_INTERVAL } from './constants';
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
-import { getImage } from '../../api';
-import Loader from '../loader/loader-component.vue';
-import type { Coffee } from '../../types';
+import { getImage } from '@/api';
+import Loader from '@/components/loader/loader-component.vue';
+import type { Coffee } from '@/types';
 
 const props = defineProps({
   item: {
@@ -112,7 +112,7 @@ const notes = props.item.notes.split(',');
   }
 
   &::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: transparent;
   }
 
   &::-webkit-scrollbar-thumb {

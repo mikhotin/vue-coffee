@@ -1,26 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useQueryClient, useQuery } from '@tanstack/vue-query';
-import { getCoffee } from '@/api';
+import { useQueryClient } from '@tanstack/vue-query';
 import Button from '@/components/button/load-button.vue';
 import Card from '@/components/card/card-component.vue';
-import type { Coffee } from '@/types';
-import { REFETCH_INTERVAL } from '@/constants';
+import { useCoffee } from '@/hooks/useCoffee';
 
 const queryClient = useQueryClient();
-const coffeeList = ref<Array<Coffee>>([]);
-const refetchInterval = ref(REFETCH_INTERVAL);
-
-const { isLoading, isFetching } = useQuery({
-  queryKey: ['coffee'],
-  queryFn: getCoffee,
-  refetchInterval: refetchInterval.value,
-  refetchOnWindowFocus: false,
-  onSuccess: (data) => {
-    coffeeList.value.push(data);
-    refetchInterval.value = REFETCH_INTERVAL;
-  },
-});
+const { coffeeList, isLoading, isFetching } = useCoffee();
 
 const loadCoffee = () => {
   queryClient.invalidateQueries({ queryKey: ['coffee'] });
